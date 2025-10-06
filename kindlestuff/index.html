@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" http-equiv="refresh" content="1">
+    <title>Log</title>
+    <link rel="stylesheet" href="/static/styles/nav.css" />
+     <link rel="stylesheet" href="/static/styles/basiclayout.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<style>
+
+
+</style>
+<body>
+
+<div class="alert">
+
+   <br>
+   &nbsp;&nbsp;Description:
+   <br>
+<textarea id="display" name="displayed_text" rows="35" cols="55">   
+   {% for line in b_lines %}
+      {{ line }}
+   {% endfor %}
+</textarea>
+
+</div>
+
+
+</body>
+</html>
