@@ -25,16 +25,19 @@ def getch():
     finally:
         termios.tcsetattr(fd, termios.TCSAFLUSH, orig)
 
-# no editing, no clearing, no backspacing, no saving manually, nothing, just new doc if specified
+# needs a docname aspect; no editing, no clearing, nothing, just new doc if specified
 import time
 import argparse
 
 timestr = time.strftime("%Y%m%d-%H%M%S-")
+subfolder = "Scratchpad"
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', nargs='?') # specify a filename
 parser.add_argument('s', nargs='?') # use no timestamps
 args = parser.parse_args()
+
+print(args)
 
 if args.s:
     timestr = ""
@@ -49,7 +52,7 @@ print(f"Loaded: {scratchdoc}")
 x = 1 # toggle for the while, to get out, ctrl+c
 
 while not x == 0:
-    with open(scratchdoc, "a") as f:
+    with open(f"{subfolder}/{scratchdoc}", "a") as f:
         print('', end='', flush=False)
         c = getch()
         if c == b'^[':
