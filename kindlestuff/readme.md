@@ -11,7 +11,7 @@ Note: I'm assuming you're tinkering on a raspberry pi zero running dietpi, you p
 ### Basic steps (with Geany)
 
 1. Install Geany; set the autosave plugin to "enabled" and the duration to 1 second (put it back to 300 when you're not using this, and keep your tmp folder clean).
-2. Open a file in the same directory as the script called "scratchdoc.md"
+2. Open a file in the "Scratchpad" directory (might need to make it) called "scratchdoc.md"
 3. Edit reflect.py to have your hostname (dietpi shows this when you log in) and preferred document (see prior step) if you don't want to specify it at runtime.
 4. In the Geany terminal run `python reflect.py <filename>`, you can leave off the filename if you're using scratchdoc.md
 5. Point your desired browser (like on your paperwhite) to the hostname and port.
