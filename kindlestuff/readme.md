@@ -37,18 +37,18 @@ Repeat: it does not check anything. IT HAS NO SAFETY OR SANITY CHECKS. Obviously
 
 It may skip letters if you type very quickly. You cannot backspace or delete or any of that. Forward only. Joyce it up. 
 
-You run it by typing "python3 scribble.py" after logging in to dietpi and changing to the directory the script is in.
+You run it by typing `python3 scribble.py` after logging in to dietpi and changing to the directory the script is in.
 
 Option "s" will silence the timestamps and work with the file as given, otherwise it'll prepend a timestamp. If you're using reflect, you should use this (as described below).
 Option "-f" allows you to specify a filename; if you don't use "s" with it it'll prepend the timestamp as usual, but really, you shouldn't be opening old files with this program anyway.
 
-Ie "python3 scribble.py s -f banana.md" will make a file called "banana.md" or open one in the same directory and start typing in it. Without the "s" it'll be something like "2025blablablah-banana.md". Without either it'll open a timestamped "scribble.md" file. It's stupid simple.
+Ie `python3 scribble.py s -f banana.md` will make a file called "banana.md" or open one in the same directory and start typing in it. Without the "s" it'll be something like "2025blablablah-banana.md". Without either it'll open a timestamped "scribble.md" file. It's stupid simple.
 
 ### Basic steps (with reflect)
 
 0. Do step 3 from the Geany steps above, editing reflect.py to match your hostname and port.
 1. Change to the script directory, and type (change both filenames if you change one):
-  nohup python3 reflect.py bubblegum3.md & python3 scribble.py s -f bubblegum3.md
-3. Type. When you're done, hit ctrl+c to kill scribble.py and type "killall python3" (or whatever python you called) to end reflect.py.
-where 'bubblegum3.md' is the name of the file you want to use
+  `nohup python3 reflect.py bubblegum3.md & python3 scribble.py s -f bubblegum3.md`
+2. Open your desired browser and point to the hostname you specified.
+3. Type. When you're done, hit ctrl+c to kill scribble.py and type `killall python3` (or whatever python you called) to end reflect.py.
 4. Move any words you care about to a safer place.
