@@ -39,8 +39,8 @@ It may skip letters if you type very quickly. You cannot backspace or delete or 
 
 You run it by typing "python3 scribble.py" after logging in to dietpi and changing to the directory the script is in.
 
-Option "s" will silence the timestamps and work with the file as given, otherwise it'll prepend a timestamp. If you're using reflect and aren't opening an existing scribble, you should use this.
-Option "-f" allows you to specify a filename; you have to use the same filename you specified for the reflect.py part if you want that to work properly.
+Option "s" will silence the timestamps and work with the file as given, otherwise it'll prepend a timestamp. If you're using reflect, you should use this (as described below).
+Option "-f" allows you to specify a filename; if you don't use "s" with it it'll prepend the timestamp as usual, but really, you shouldn't be opening old files with this program anyway.
 
 Ie "python3 scribble.py s -f banana.md" will make a file called "banana.md" or open one in the same directory and start typing in it. Without the "s" it'll be something like "2025blablablah-banana.md". Without either it'll open a timestamped "scribble.md" file. It's stupid simple.
 
