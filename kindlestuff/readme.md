@@ -42,7 +42,7 @@ You run it by typing `python3 scribble.py` after logging in to dietpi and changi
 Option "s" will silence the timestamps and work with the file as given, otherwise it'll prepend a timestamp. If you're using reflect, you should use this (as described below).
 Option "-f" allows you to specify a filename; if you don't use "s" with it it'll prepend the timestamp as usual, but really, you shouldn't be opening old files with this program anyway.
 
-Ie `python3 scribble.py s -f banana.md` will make a file called "banana.md" or open one in the same directory and start typing in it. Without the "s" it'll be something like "2025blablablah-banana.md". Without either it'll open a timestamped "scribble.md" file. It's stupid simple.
+Ie `python3 scribble.py s -f banana.md` will make a file called "banana.md" or open one in the same directory and start typing in it. Without the "s" it'll be something like "2025blablablah-banana.md". Without either it'll open a timestamped "scribble.md" file. It's stupid simple; avoid using the flags unless you have to. You can edit the script itself to change defaults.
 
 ### Basic steps (with reflect)
 
