@@ -22,4 +22,4 @@ def index():
     return render_template('index.html', b_lines=b_lines)
 
 if __name__ == "__main__":
-    app.run(host='192.168.7.176', port=5000, debug=True, threaded=False)
+    app.run(host='192.168.X.XXX', port=5000, debug=True, threaded=False)
