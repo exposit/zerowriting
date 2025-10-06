@@ -2,14 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" http-equiv="refresh" content="1">
-    <title>Log</title>
-    <link rel="stylesheet" href="/static/styles/nav.css" />
-     <link rel="stylesheet" href="/static/styles/basiclayout.css" />
+    <title>Reflected</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <style>
-
-
+#tblock{ display:flex;
+       flex-direction:column-reverse;
+       overflow-y:scroll;
+       width:90%;
+       height:600px;
+       border:3px solid black; }
+body{ font-family:arial,sans-serif;
+      font-size:15px; }
 </style>
 <body>
 
@@ -18,11 +22,12 @@
    <br>
    &nbsp;&nbsp;Description:
    <br>
-<textarea id="display" name="displayed_text" rows="35" cols="55">   
+
+<div id="tblock">
    {% for line in b_lines %}
-      {{ line }}
+      <p>{{ line }}</p>
    {% endfor %}
-</textarea>
+</div>
 
 </div>
 
