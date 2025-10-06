@@ -6,7 +6,7 @@ Which is to say, no it won't work on the open internets and no you should not us
 
 This is entirely cobbled together in an afternoon stuff I'm playing with to avoid Real Writing. May it help someone, even if it's just to say, "damn, I will actually go write instead of procrastinating like you".
 
-Note: I'm assuming you're tinkering on a raspberry pi zero or similar running dietpi or similar.
+Note: I'm assuming you're tinkering on a raspberry pi zero running dietpi, you probably can make it work on other systems.
 
 ### Basic steps (with Geany)
 
