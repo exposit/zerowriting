@@ -1,0 +1,8 @@
+! I think this uses ! for comments
+! also filename case matters
+! use a truetype font and size
+!xterm*faceName: DejaVu Sans Mono
+xterm*faceName: Fira Code
+xterm*faceSize: 11
+! adjust linespacing
+xterm*scaleHeight: 1.35
