@@ -38,14 +38,15 @@ framebuffer_width=220
 framebuffer_height=165
 ```
 
-Note: if you want to go through with the whole install, do it, but be sure to reinstall libmm after using raspi-config but before rebooting. And comment out the two lines in config.txt, and also rename your 99-fbturbo file properly. Basically pay attention and don't be me.
+Note: if you want to go through with the whole install, do it, but be sure to reinstall libmm after using raspi-config but before rebooting. And comment out the two framebuffer lines in config.txt, and also rename your 99-fbturbo file properly. Basically pay attention and don't be me.
 
 Install fbturbo:
 `sudo apt install xserver-xorg-video-fbturbo`
 
-Fix the resolution by replacing the hdmi_cvt line in /boot/firmware/config.txt:
-`hdmi_cvt 220 165 60 6 0 0 0`
+Changing the hdmi_cvt line doesn't change the resolution, it blanks the screen.
 
+Troubleshooting:
+`nano /home/pi/.local/share/xorg/Xorg.0.log`
 
 ## general setup
 
