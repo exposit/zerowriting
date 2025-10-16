@@ -10,6 +10,8 @@ Plug a keyboard into the pi (requires a microusb to your keyboard). Plug the tem
 
 Set the user to "pi" and give it a sensible and impossible to guess password like "rhubarb" or "bumbleberry" (mmm pie). Put in the SSID (the name of the wifi) and the password.
 
+You need (just off the top of my head) snap if you want helix + marksman. Otherwise nano, micro, or a similar editor will work fine. Also rclone.
+
 ## Setting up the tiny screen
 
 Bit of a pain in the ass, tbh. But so neat.
@@ -43,10 +45,18 @@ Note: if you want to go through with the whole install, do it, but be sure to re
 Install fbturbo:
 `sudo apt install xserver-xorg-video-fbturbo`
 
-Changing the hdmi_cvt line doesn't change the resolution, it blanks the screen.
+Changing the hdmi_cvt line doesn't change the resolution, it blanks the screen. You can try the framebuffer lines above again if everything's working as expected.
+
+Now edit the .xinitrc file (from the configs repo) to get rid of all the extra stuff under "openbox". You just need "openbox &" and the line for xterm. Note these are based on using the framebuffer lines above, and you may have to fiddle with the geometry a bit (it's COLS x ROWS).
+```bash
+openbox &
+xterm -fg white -bg black -geometry 34x12
+```
 
 Troubleshooting:
 `nano /home/pi/.local/share/xorg/Xorg.0.log`
+
+Usually ssh'ing in will give you an error message about fbmc if you just need to reinstall libmm.
 
 ## general setup
 
