@@ -16,28 +16,36 @@ Bit of a pain in the ass, tbh. But so neat.
 
 First: I'm using the 2" oled/lcd hat (https://www.waveshare.com/oled-lcd-hat-a.htm). Wiki here: (https://www.waveshare.com/wiki/OLED/LCD_HAT_(A)). With a Raspberry Pi Zero 2 WH.
 
-I followed the instructions step by step. First use raspi-config to turn on spi and i2c. Then go scroll down to the Bookworm specific link (I used the latest bookworm version) & instructions and follow those. 
-
-I did the instructions on a pi with an existing hdmi display, except I did not use raspi-config to turn spi on until after I had pressed the screen onto the pi. Everything worked, but I realized I had forgotten the last two steps using raspi-config and I had also named my 99-fbturbo file ".conf" not ".tilde". 
-
-When I renamed the file to 99-fbturbo.tilde properly I got a black screen. I was eventually able to tinker with it and get it to do what I was telling it to do (load the driver and run startx) but decided to roll it back since I'm using helix anyway. I suspect startx was failing as booting up would hang before the prompt. Something to troubleshoot.
-
-My guess is you get either the raw CLI or xstart.
-
-Note: if you want to go through with the whole install, do it, but be sure to reinstall libmm below after using raspi-config but before rebooting.
-
-
-To set the resolution to readable:
-```
-framebuffer_width=220
-framebuffer_height=165
-```
-
 If you lose raspi-config in the process, reinstall it:
 `sudo apt install raspi-config`
 
 If you lose libmm because installing raspi-config uninstalled it:
 `sudo apt-get install --reinstall libraspberrypi0 libraspberrypi-dev libraspberrypi-doc libraspberrypi-bin`
+
+I followed the instructions step by step. First use raspi-config to turn on spi and i2c. Then go scroll down to the Bookworm specific link (I used the latest bookworm version) & instructions and follow those. At some point you will lose libmm! You can actually check if the screen is black because of this by using ssh, it'll tell you so once you log in.
+
+I did the instructions on a pi with an existing hdmi display, except I did not use raspi-config to turn spi on until after I had pressed the screen onto the pi. Everything worked, but I realized I had forgotten the last two steps using raspi-config and I had also named my 99-fbturbo file ".conf" not ".tilde". 
+
+This actually gives a perfectly usable CLI by commenting out the lines in .bash_profile:
+```
+    fbcp &
+    startx  2> /tmp/xorg_errors
+```
+
+and to set the resolution to readable add this to your /boot/firmware/config.txt:
+```
+framebuffer_width=220
+framebuffer_height=165
+```
+
+Note: if you want to go through with the whole install, do it, but be sure to reinstall libmm after using raspi-config but before rebooting. And comment out the two lines in config.txt, and also rename your 99-fbturbo file properly. Basically pay attention and don't be me.
+
+Install fbturbo:
+`sudo apt install xserver-xorg-video-fbturbo`
+
+Fix the resolution by replacing the hdmi_cvt line in /boot/firmware/config.txt:
+`hdmi_cvt 220 165 60 6 0 0 0`
+
 
 ## general setup
 
