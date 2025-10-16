@@ -18,8 +18,8 @@ First: I'm using the 2" oled/lcd hat (https://www.waveshare.com/oled-lcd-hat-a.h
 
 I followed the instructions step by step. First use raspi-config to turn on spi and i2c. Then go scroll down to the Bookworm specific link (I used the latest bookworm version) & instructions and follow those. 
 
-I did the instructions on a pi with an existing hdmi display, except I did not use raspi-config to turn spi on until after I had pressed the screen onto the pi. Everything worked, but I realized I had forgotten the last two steps using raspi-config and I had also named my 99-fbturbo file ".conf" not ".~". 
-When I renamed the file to 99-fbturbo.~ properly I got a black screen. I was eventually able to tinker with it and get it to do what I was telling it to do (load the driver and run startx) but decided to roll it back since I'm using helix anyway. I suspect startx was failing as booting up would hang before the prompt. Something to troubleshoot.
+I did the instructions on a pi with an existing hdmi display, except I did not use raspi-config to turn spi on until after I had pressed the screen onto the pi. Everything worked, but I realized I had forgotten the last two steps using raspi-config and I had also named my 99-fbturbo file ".conf" not '.~'. 
+When I renamed the file to '99-fbturbo.~' properly I got a black screen. I was eventually able to tinker with it and get it to do what I was telling it to do (load the driver and run startx) but decided to roll it back since I'm using helix anyway. I suspect startx was failing as booting up would hang before the prompt. Something to troubleshoot.
 My guess is you get either the raw CLI or xstart.
 
 If you lose raspi-config in the process, reinstall it:
