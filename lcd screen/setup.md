@@ -1,10 +1,10 @@
 # Setting up a "writer deck" with a small 2" lcd screen
 
+This is a learn as you go process, and I was definitely learning as I went. Be prepared to google error messages. Having a computer that can ssh in to the pi is important so you can copy stuff from the internet easily.
+
 ## Setting up the Pi
 
-Flash Raspbian lite bookworm, the latest option is fine, using Balena Etcher and a 64gb or 128gb card ($15 will cover it). 
-
-You'll be googling a lot, having a computer that can ssh in to the pi is important. 
+Flash Raspbian lite bookworm, the latest option that uses bookworm (everything I read said trixie would not work) is fine, using Balena Etcher and a 64gb or 128gb card ($15 will cover it). 
 
 Plug a keyboard into the pi (requires a microusb to your keyboard). Plug the temporary screen in; you need an hdmi to minihdmi cable but kits will have one).
 
@@ -18,15 +18,17 @@ Bit of a pain in the ass, tbh. But so neat.
 
 First: I'm using the 2" oled/lcd hat (https://www.waveshare.com/oled-lcd-hat-a.htm). Wiki here: (https://www.waveshare.com/wiki/OLED/LCD_HAT_(A)). With a Raspberry Pi Zero 2 WH.
 
-If you lose raspi-config in the process, reinstall it:
+If you lose raspi-config at any point in the process, reinstall it:
 ```
 sudo apt install raspi-config
 ```
 
-If you lose libmm because installing raspi-config uninstalled it:
+If you lose libmm at any point because installing raspi-config uninstalled it:
 ```
 sudo apt-get install --reinstall libraspberrypi0 libraspberrypi-dev libraspberrypi-doc libraspberrypi-bin
 ```
+
+You will need libmm to be installed each time you reboot.
 
 I followed the instructions step by step. First use raspi-config to turn on spi and i2c. Then go scroll down to the Bookworm specific link (I used the latest bookworm version) & instructions and follow those. At some point you will lose libmm! You can actually check if the screen is black because of this by using ssh, it'll tell you so once you log in.
 
