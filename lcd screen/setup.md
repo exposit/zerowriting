@@ -10,6 +10,8 @@ This is a learn as you go process, and I was definitely learning as I went. Be p
 
 Having a computer that can ssh in to the pi is more or less vital so you can copy stuff from the internet easily. Please read through the steps before you start, if you're trying it, as you'll need a few cables and such along the way.
 
+NOTE: Case usually matters on linux!
+
 ## Setting up the Pi
 
 Flash Raspbian lite bookworm, the latest option that uses bookworm (everything I read said trixie would not work) is fine, using Balena Etcher and a 64gb or 128gb card ($15 will cover it). 
@@ -56,14 +58,14 @@ framebuffer_width=220
 framebuffer_height=165
 ```
 
-Note: if you want to go through with the whole install on the wiki page, do it, but be sure to reinstall libmm after using raspi-config but before rebooting. And comment out the two framebuffer lines in config.txt, and also rename your 99-fbturbo file properly. Basically pay attention and don't be me.
+Note: from this part on, be sure to reinstall libmm after using raspi-config but before rebooting. And comment out the two framebuffer lines in config.txt, and also rename your 99-fbturbo file properly (.~). Basically pay attention and don't be me.
 
-Install fbturbo:
+To install fbturbo:
 ```
 sudo apt install xserver-xorg-video-fbturbo
 ```
 
-Changing the hdmi_cvt line doesn't change the resolution, it blanks the screen. You can try the framebuffer lines above again if everything's working as expected.
+Changing the hdmi_cvt line doesn't change the resolution, it blanks the screen (for me). You can try the framebuffer lines above again if everything's working as expected.
 
 Now edit the .xinitrc file (from the configs repo) to get rid of all the extra stuff under "openbox". You just need "openbox &" and the line for xterm. Note these are based on using the framebuffer lines above, and you may have to fiddle with the geometry a bit (it's COLS x ROWS).
 ```bash
