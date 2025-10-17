@@ -2,7 +2,7 @@
 
 A writer deck is a distraction-free device; unlike a similarly sized phone or tablet, it does just one thing, write! My goal was to create an even smaller and less expensive version of my "pi tablet" (pi zero 2 connected to an elecrow 7" touchscreen, with a bluetooth keyboard).
 
-Parts: Waveshare 2" lcd with dual oled (link below), a pi zero 2 wh (so no soldering but pricier), a "copy holder" clip (artist grade), and an Arteck slim flat bluetooth keyboard (selected because it has a place to clip the holder). Note the clip fits kind of gingerly, you do NOT want to damage the gold cable. Experiment but be careful. Also needed is a 20w (you need about 13w I think) powerbank (go for at least 5000mah) that has microusb or usb-a output (consider your cables, the pi is powered by microusb).
+Parts: Waveshare 2" lcd with dual oled (link below), a pi zero 2 wh (so no soldering but pricier), a "copy holder" clip (artist grade), and an Arteck slim flat bluetooth keyboard (selected because it has a place to clip the holder). Note the clip fits kind of gingerly, you do NOT want to damage the gold cable. Experiment but be careful. Also needed is a 20w (you need about 13w I think) powerbank (go for at least 5000mah) that has microusb or usb-a output (consider your cables, the pi is powered by micro-usb, I have like ten of those collected over the years and they are all usb-a on the other end).
 
 The keyboard is the biggest component; with a folding style model it all fits in a flat 5x7 pen case. With a phone keyboard case you could easily tuck the pi & screen in and have a phone-sized writing device with you at all times. And so on.
 
