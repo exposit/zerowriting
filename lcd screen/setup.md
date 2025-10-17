@@ -1,26 +1,34 @@
 # Setting up a "writer deck" with a 2" lcd screen
 
-This is a learn as you go process, and I was definitely learning as I went. Be prepared to google error messages. Having a computer that can ssh in to the pi is important so you can copy stuff from the internet easily.
+A writer deck is a distraction-free device; unlike a similarly sized phone or tablet, it does just one thing, write! My goal was to create an even smaller and less expensive version of my "pi tablet" (pi zero 2 connected to an elecrow 7" touchscreen, with a bluetooth keyboard).
+
+Parts: Waveshare 2" lcd with dual oled (link below), a pi zero 2 wh (so no soldering but pricier), a "copy holder" clip (artist grade), and an Arteck slim flat bluetooth keyboard (selected because it has a place to clip the holder). Note the clip fits kind of gingerly, you do NOT want to damage the gold cable. Experiment but be careful. Also needed is a 20w (you need about 13w I think) powerbank (go for at least 5000mah) that has microusb or usb-a output (consider your cables, the pi is powered by microusb).
+
+The keyboard is the biggest component; with a folding style model it all fits in a flat 5x7 pen case. With a phone keyboard case you could easily tuck the pi & screen in and have a phone-sized writing device with you at all times. And so on.
+
+This is a learn as you go process, and I was definitely learning as I went. Be prepared to google error messages. 
+
+Having a computer that can ssh in to the pi is more or less vital so you can copy stuff from the internet easily. Please read through the steps before you start, if you're trying it, as you'll need a few cables and such along the way.
 
 ## Setting up the Pi
 
 Flash Raspbian lite bookworm, the latest option that uses bookworm (everything I read said trixie would not work) is fine, using Balena Etcher and a 64gb or 128gb card ($15 will cover it). 
 
-Plug a keyboard into the pi (requires a microusb to your keyboard). Plug the temporary screen in; you need an hdmi to minihdmi cable but kits will have one).
+Plug a keyboard into the pi (micro usb to whatever your wired keyboard's port is). Plug the temporary screen in; you need an hdmi to mini hdmi cable or adapter (a $10 zero kit should have one).
 
 Set the user to "pi" and give it a sensible and impossible to guess password like "rhubarb" or "bumbleberry" (mmm pie). Put in the SSID (the name of the wifi) and the password.
 
 You need (just off the top of my head) snap if you want helix + marksman. Otherwise nano, micro, or a similar editor will work fine. Also rclone. All that is at the bottom of this document.
 
-Oh, and while you have raspi-config do set the timezone and keyboard to US.
+Oh, and while you have raspi-config do set the timezone and keyboard to US. Otherwise you might be very confused later when "#" comes out as a literal pound sign.
 
 ## Setting up the tiny screen
 
 Bit of a pain in the ass, tbh. But so neat.
 
-First: I'm using the 2" oled/lcd hat (https://www.waveshare.com/oled-lcd-hat-a.htm). Wiki here: (https://www.waveshare.com/wiki/OLED/LCD_HAT_(A)). With a Raspberry Pi Zero 2 WH.
+I'm using the 2" lcd hat with dual oled screens (https://www.waveshare.com/oled-lcd-hat-a.htm). Wiki here: (https://www.waveshare.com/wiki/OLED/LCD_HAT_(A)). No reason, just thought the little screens would be fun to play with (and they are).
 
-If you lose raspi-config at any point in the process, reinstall it:
+If you lose raspi-config at any point in the process, reinstall it with this:
 ```
 sudo apt install raspi-config
 ```
