@@ -1,4 +1,4 @@
-# Setting up a "writer deck" with a small 2" lcd screen
+# Setting up a "writer deck" with a 2" lcd screen
 
 This is a learn as you go process, and I was definitely learning as I went. Be prepared to google error messages. Having a computer that can ssh in to the pi is important so you can copy stuff from the internet easily.
 
@@ -72,11 +72,20 @@ Usually ssh'ing in will give you an error message about fbmc if you just need to
 
 ## general setup
 
-Getting a google drive setup as a remote (https://rclone.org/drive/):
-``
+### google drive & sync
 
-Setting up rclone bisync (https://rclone.org/bisync/):
-``
+Getting a google drive setup as a remote: https://rclone.org/drive/ (it's number 22 as of this writing) You MUST use sudo to set it up or it'll have many errors when you run it later, and the "remote" you set up is per user. You can use the google drive defaults for awhile, if you're willing to wait through occasional rate limiting. Or you can set up your own token and such (way outside my scope to explain, sorry).
+
+To authorize access you will need a computer you can run rclone on that has a browser. The pi zero 2 runs chromium like mud, so consider downloading the windows version or whatever you use as a desktop and running that. The command is given to you in the process and if you're using ssh you can just copy paste it into the windows terminal.
+
+Setting up rclone bisync: https://rclone.org/bisync/ This has the command to copy paste, though you'll need to run it with dudo, and you'll need to fill in your remote name, a colon, and the path of the folder you want to sync, and then also a directory on your pi you want to sync to. Back the folder up on your desktop first. Zip it, stick it in an entirely different place, check the contents/unzip it there to make sure it's valid and working. Then use --dry-run to test before you actually run the command on the pi. 
+
+
+### helix editor
+
+This is a modal editor. bu it's pretty straightforward. "i" lets you type. if you're in "i" mode esc puts you in "NOR" mode and you can use ":" to type in commands like "theme" or "config-open" or "write" or "quit". Or hit spacebar for a file menu that's great on tiny screens.
+
+Alternatives: micro editor, nano (comes with the pi). I've seen people using Focuswriter too.
 
 ```
 sudo apt install snapd
@@ -84,9 +93,9 @@ snap install helix --classic`
 snap install marksman`
 ```
 
-Pick a theme, add the markdown.strikethrough option as faux comments.
+Pick a theme, add the markdown.strikethrough option as faux comments. Save files as .md to take full advantage of the colors.
 
-Open config.toml and add:
+Open ~/.configs/helix/config.toml and add:
 ```
 theme = "gruxbox"
 
@@ -101,7 +110,17 @@ enable = true
 "C-s" = ":w"
 ```
 
+This sets the theme (I typoed gruvbox when making the file so I have my own easy to identify copy to personalize, yay), sets true-color so the theme will work, removes the gutters (spacers, line numbers, just don't have space), enables soft-wrap, and makes ctrl+s save the file.
+
+When helix feels comfortable and you know how to UNDO and REDO properly, you can turn on the autosave by adding a line to the config file for it. Don't do this until you feel solid on how the program works. Sometimes a shortcut will be set up to delete paragraphs or something, and if you don't know how to bring them back it's better to close the whole thing unsaved than autosave.
+
+### playing with the OLEDs
+
 To run one of the provided demo scripts in the background so you can do other stuff:
 ```
 sudo nohup python3 double_ssd1306_128x64.py & <other stuff, or just leave blank>
 ```
+
+## todo
+
+I've got to think of something fun to do with the oleds! Honestly they're so cute I wish I could use them for writing itself but they're also very small. 
