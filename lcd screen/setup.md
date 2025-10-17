@@ -10,7 +10,9 @@ Plug a keyboard into the pi (requires a microusb to your keyboard). Plug the tem
 
 Set the user to "pi" and give it a sensible and impossible to guess password like "rhubarb" or "bumbleberry" (mmm pie). Put in the SSID (the name of the wifi) and the password.
 
-You need (just off the top of my head) snap if you want helix + marksman. Otherwise nano, micro, or a similar editor will work fine. Also rclone.
+You need (just off the top of my head) snap if you want helix + marksman. Otherwise nano, micro, or a similar editor will work fine. Also rclone. All that is at the bottom of this document.
+
+Oh, and while you have raspi-config do set the timezone and keyboard to US.
 
 ## Setting up the tiny screen
 
