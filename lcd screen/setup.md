@@ -30,17 +30,17 @@ I did the instructions on a pi with an existing hdmi display, except I did not u
 
 This actually gives a perfectly usable CLI by commenting out the lines in .bash_profile:
 ```
-    fbcp &
-    startx  2> /tmp/xorg_errors
+    #fbcp &
+    #startx  2> /tmp/xorg_errors
 ```
 
-and to set the resolution to readable add this to your /boot/firmware/config.txt:
+and to set the resolution to readable add this to /boot/firmware/config.txt:
 ```
 framebuffer_width=220
 framebuffer_height=165
 ```
 
-Note: if you want to go through with the whole install, do it, but be sure to reinstall libmm after using raspi-config but before rebooting. And comment out the two framebuffer lines in config.txt, and also rename your 99-fbturbo file properly. Basically pay attention and don't be me.
+Note: if you want to go through with the whole install on the wiki page, do it, but be sure to reinstall libmm after using raspi-config but before rebooting. And comment out the two framebuffer lines in config.txt, and also rename your 99-fbturbo file properly. Basically pay attention and don't be me.
 
 Install fbturbo:
 `sudo apt install xserver-xorg-video-fbturbo`
@@ -61,8 +61,31 @@ Usually ssh'ing in will give you an error message about fbmc if you just need to
 ## general setup
 
 Getting a google drive setup as a remote (https://rclone.org/drive/):
+``
 
-Setting up rclone bisync (https://rclone.org/commands/rclone_bisync/):
+Setting up rclone bisync (https://rclone.org/bisync/):
+``
+
+`sudo apt install snapd`
+`snap install helix --classic`
+`snap install marksman`
+
+Pick a theme, add the markdown.strikethrough option as faux comments.
+
+Open config.toml and add:
+```
+theme = "gruxbox"
+
+[editor]
+true-color = true
+gutters = []
+
+[editor.soft-wrap]
+enable = true
+
+[keys.insert]
+"C-s" = ":w"
+```
 
 To run one of the provided demo scripts in the background so you can do other stuff:
 `sudo nohup python3 double_ssd1306_128x64.py & <other stuff, or just leave blank>`
