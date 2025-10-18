@@ -26,9 +26,9 @@ Oh, and while you have raspi-config do set the timezone and keyboard to US. Othe
 
 ## Setting up the tiny screen
 
-Bit of a pain in the ass, tbh. But so neat.
+Bit of a pain in the ass, tbh. But so neat. I'm using the 2" lcd hat with dual oled screens (https://www.waveshare.com/oled-lcd-hat-a.htm). Wiki here: (https://www.waveshare.com/wiki/OLED/LCD_HAT_(A)). No reason, just thought the little screens would be fun to play with (and they are).
 
-I'm using the 2" lcd hat with dual oled screens (https://www.waveshare.com/oled-lcd-hat-a.htm). Wiki here: (https://www.waveshare.com/wiki/OLED/LCD_HAT_(A)). No reason, just thought the little screens would be fun to play with (and they are).
+For ref: at my Xresources settings (DM Mono, 11pt) I can get 10 lines in Helix. The Oleds with the same font at 12pt display 4, and they seem a tiny bit smaller.
 
 If you lose raspi-config at any point in the process, reinstall it with this:
 ```
@@ -40,13 +40,13 @@ If you lose libmm at any point because installing raspi-config uninstalled it:
 sudo apt-get install --reinstall libraspberrypi0 libraspberrypi-dev libraspberrypi-doc libraspberrypi-bin
 ```
 
-You will need libmm to be installed each time you reboot.
+You will need libmm to be installed when you reboot.
 
 I followed the instructions step by step. First use raspi-config to turn on spi and i2c. Then go scroll down to the Bookworm specific link (I used the latest bookworm version) & instructions and follow those. At some point you will lose libmm! You can actually check if the screen is black because of this by using ssh, it'll tell you so once you log in.
 
 I did the instructions on a pi with an existing hdmi display, except I did not use raspi-config to turn spi on until after I had pressed the screen onto the pi. Everything worked, but I realized I had forgotten the last two steps using raspi-config and I had also named my 99-fbturbo file ".conf" not ".tilde". 
 
-This actually gives a perfectly usable CLI by commenting out the lines in .bash_profile:
+This actually gives a perfectly usable CLI by commenting out the lines in .bash_profile (don't do this, this is just for reference if something goes wrong later and you need to revert):
 ```
     #fbcp &
     #startx  2> /tmp/xorg_errors
@@ -58,6 +58,8 @@ framebuffer_width=220
 framebuffer_height=165
 ```
 
+Okay, start doing things again. The rest of this is just gotchas I stumbled over, customization stuff, and notes.
+
 Note: from this part on, be sure to reinstall libmm after using raspi-config but before rebooting. And comment out the two framebuffer lines in config.txt, and also rename your 99-fbturbo file properly (.~). Basically pay attention and don't be me.
 
 To install fbturbo:
@@ -67,11 +69,48 @@ sudo apt install xserver-xorg-video-fbturbo
 
 Changing the hdmi_cvt line doesn't change the resolution, it blanks the screen (for me). You can try the framebuffer lines above again if everything's working as expected.
 
-Now edit the .xinitrc file (from the configs repo) to get rid of all the extra stuff under "openbox". You just need "openbox &" and the line for xterm. Note these are based on using the framebuffer lines above, and you may have to fiddle with the geometry a bit (it's COLS x ROWS).
-```bash
+Install x11-xserver-utils (otherwise no xdrb command the merge in xinitrc calls for) and nothing much will happen:
+
+```
+sudo apt install x11-xserver-utils
+```
+
+Edit the .xinitrc file, from the copy in the configs folder adjacent to this one, that has a proper set up. You just need "openbox &" and the line for xterm. Note these are based on using the framebuffer lines above, and you may have to fiddle with the geometry a bit (it's COLS x ROWS) for custom fonts specified in the .Xresources file (the next step). The code below is with the default font, but with my settings in .Xresources it is 30x10, for example. You can test by typing 12345 over and over until it wraps, and that'll tell you how many columns to try trimming. For rows, Each unit of 2 is roughly one row.
+
+```
 openbox &
 xterm -fg white -bg black -geometry 34x12
 ```
+
+Install x11-xserver-utils with apt get (otherwise you don't have the xdrb command the merge in xinitrc calls for) and nothing much will happen:
+
+```
+sudo apt install x11-xserver-utils
+```
+
+My .Xresources file (you can test it by setting linespacing to something ridiculous):
+
+```
+! use a truetype font and size
+XTerm*renderFont: true
+xterm*faceName: DM Mono
+xterm*faceSize: 9
+! adjust linespacing
+xterm*scaleHeight: 1
+```
+
+This gives me about 8 lines of text on screen in helix, with thirty letters per line. Small and cramped but very readable.
+
+To find the fonts you have installed:
+
+```
+fc-list :spacing=100
+fc-list : family | sort | uniq
+```
+
+Note: the easiest way to move font files was through rsync and a transfer folder in my writing folder.
+
+I also edited out the hostname, so it'd take up less space. 
 
 Troubleshooting:
 ```
@@ -88,8 +127,7 @@ Getting a google drive setup as a remote: https://rclone.org/drive/ (it's number
 
 To authorize access you will need a computer you can run rclone on that has a browser. The pi zero 2 runs chromium like mud, so consider downloading the windows version or whatever you use as a desktop and running that. The command is given to you in the process and if you're using ssh you can just copy paste it into the windows terminal.
 
-Setting up rclone bisync: https://rclone.org/bisync/ This has the command to copy paste, though you'll need to run it with dudo, and you'll need to fill in your remote name, a colon, and the path of the folder you want to sync, and then also a directory on your pi you want to sync to. Back the folder up on your desktop first. Zip it, stick it in an entirely different place, check the contents/unzip it there to make sure it's valid and working. Then use --dry-run to test before you actually run the command on the pi. 
-
+Setting up rclone bisync: https://rclone.org/bisync/ This has the command to copy paste, though you'll need to run it with sudo, and you'll need to fill in your remote name, a colon, and the path of the folder you want to sync, and then also a directory on your pi you want to sync to. Back the folder up on your desktop first. Zip it, stick it in an entirely different place, check the contents/unzip it there to make sure it's valid and working. Then use --dry-run to test before you actually run the command on the pi. 
 
 ### helix editor
 
@@ -99,13 +137,13 @@ Alternatives: micro editor, nano (comes with the pi). I've seen people using Foc
 
 ```
 sudo apt install snapd
-snap install helix --classic`
-snap install marksman`
+sudo snap install helix --classic`
+snap install marksman
 ```
 
 Pick a theme, add the markdown.strikethrough option as faux comments. Save files as .md to take full advantage of the colors.
 
-Open ~/.configs/helix/config.toml and add:
+Open ~/.configs/helix/config.toml and add (you may need to do this as root, read the rest of this section before doing it):
 ```
 theme = "gruxbox"
 
@@ -124,6 +162,17 @@ This sets the theme (I typoed gruvbox when making the file so I have my own easy
 
 When helix feels comfortable and you know how to UNDO and REDO properly, you can turn on the autosave by adding a line to the config file for it. Don't do this until you feel solid on how the program works. Sometimes a shortcut will be set up to delete paragraphs or something, and if you don't know how to bring them back it's better to close the whole thing unsaved than autosave.
 
+Note: it's entirely possible at this point that your rclone files (set up with sudo because otherwise they won't have permission to write properly) will no longer be accessible to your regular helix install! Yay! 
+
+If you type sudo hx or sudo helix and it says command not found:
+
+```
+which hx
+sudo ln -s /snap/bin/hx /usr/local/bin/hx
+```
+
+The config.toml and themes folder are now under /root/.config/helix/themes, you'll need to edit the config.toml through helix again, and also make the themes folder and copy the theme you want into it. I guess if you have ten people using your writerdeck they'll have to vote on the theme but otherwise just copy yours.
+
 ### playing with the OLEDs
 
 To run one of the provided demo scripts in the background so you can do other stuff:
@@ -131,6 +180,10 @@ To run one of the provided demo scripts in the background so you can do other st
 sudo nohup python3 double_ssd1306_128x64.py & <other stuff, or just leave blank>
 ```
 
+Feel free to play with the noveled.py script, it's basic, spaghetti, really untested, but I had fun writing it. It is cobbled together from the waveshare demo, it needs refactoring and testing badly, please read the code before you put it into use. Put it in the Writing folder, and it'll watch it + subfolders for changes. Save or create a file, and one oled will tell you how close you are to 50k and 100k in the whole folder with the changed file, and the other will show the changed file's word count vs. a goal of 3001 (or you can set it manually at the top of the file with word-goal: 2000 or whatever). 3001 so you know it's the default. Buttons are (top to bottom) 15 minute timer, 25 minute timer, unassigned, and 5 minute break. The sprint timers use the last saved file so won't do anything if you haven't saved this session (you can save a file that's unchanged and it'll count).
+
+When run nohup the buttons are uninterruptible, I should probably figure out threading. 
+
 ## todo
 
-I've got to think of something fun to do with the oleds! Honestly they're so cute I wish I could use them for writing itself but they're also very small. 
+- figure out threading for the buttons
