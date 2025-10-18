@@ -41,8 +41,8 @@ device_32 = ssd1306(serial_32, width=128, height=64)
 serial_64 = i2c(port=1, address=0x3D)
 device_64 = ssd1306(serial_64, width=128, height=64)
 
-execution_count = 0  		# Initialize the execution count counter
-max_execution_count = 60	# Specify the maximum number of executions so we can clear the screen occasionally
+#execution_count = 0  		# Initialize the execution count counter
+#max_execution_count = 60	# Specify the maximum number of executions so we can clear the screen occasionally
 last_file = ""              # this is used to store the last saved file for sprinting
 
 # Define the button object and specify the BCM pin number
@@ -247,11 +247,11 @@ if __name__ == "__main__":
     try:
         while True:
             time.sleep(5) # let's set this higher, we don't need to be checking every second
-            execution_count += 1
+            #execution_count += 1
             # going to use this to clear the screens every so often for safety; it resets every time a file changes so you should never see it while working
-            if execution_count >= max_execution_count:
-                draw_text("safety break", device_32.width, device_32.height, 12, device_32)
-                draw_text("safety break", device_64.width, device_64.height, 12, device_64)
+            #if execution_count >= max_execution_count:
+            #    draw_text("safety break", device_32.width, device_32.height, 12, device_32)
+            #    draw_text("safety break", device_64.width, device_64.height, 12, device_64)
 
     except KeyboardInterrupt:
         observer.stop()
