@@ -133,6 +133,8 @@ Usually ssh'ing in will give you an error message about fbmc if you just need to
 
 ## general setup
 
+This is all personal choice stuff. No reason you couldn't use dropbox (rclone has a ton of options) or some other method of moving your files. Or a different editor than helix like micro or just regular nano. Gruvbox theme is mandatory though.
+
 ### google drive & sync
 
 Getting a google drive setup as a remote: https://rclone.org/drive/ (it's number 22 as of this writing) You MUST use sudo to set it up or it'll have many errors when you run it later, and the "remote" you set up is per user. You can use the google drive defaults for awhile, if you're willing to wait through occasional rate limiting. Or you can set up your own token and such (way outside my scope to explain, sorry).
@@ -172,7 +174,7 @@ enable = true
 
 This sets the theme (I typoed gruvbox when making the file so I have my own easy to identify copy to personalize, yay), sets true-color so the theme will work, removes the gutters (spacers, line numbers, just don't have space), enables soft-wrap, and makes ctrl+s save the file.
 
-When helix feels comfortable and you know how to UNDO and REDO properly, you can turn on the autosave by adding a line to the config file for it. Don't do this until you feel solid on how the program works. Sometimes a shortcut will be set up to delete paragraphs or something, and if you don't know how to bring them back it's better to close the whole thing unsaved than autosave.
+When helix feels comfortable and you know how to UNDO and REDO properly, you can turn on the autosave by adding a line to the config file for it. Don't do this until you feel solid on how the program works. Sometimes a shortcut will be set up to delete paragraphs or something, and if you don't know how to bring them back it's better to close the whole thing unsaved and autosave might prevent that.
 
 Note: it's entirely possible at this point that your rclone files (set up with sudo because otherwise they won't have permission to write properly) will no longer be accessible to your regular helix install! Yay! 
 
@@ -183,9 +185,9 @@ which hx
 sudo ln -s /snap/bin/hx /usr/local/bin/hx
 ```
 
-The config.toml and themes folder are now under /root/.config/helix/themes, you'll need to edit the config.toml through helix again, and also make the themes folder and copy the theme you want into it. I guess if you have ten people using your writerdeck they'll have to vote on the theme but otherwise just copy yours.
+Using sudo, the config.toml and themes folder are now under /root/.config/helix/themes, you'll need to edit the config.toml through helix again, and also make the themes folder and copy the theme you want into it. I guess if you have ten people using your writerdeck they'll have to vote on the theme but otherwise just copy yours.
 
-### playing with the OLEDs
+## playing with the OLEDs
 
 To run one of the provided demo scripts in the background so you can do other stuff:
 ```
@@ -195,6 +197,8 @@ sudo nohup python3 double_ssd1306_128x64.py & <other stuff, or just leave blank>
 Feel free to play with the noveled.py script, it's basic, spaghetti, really untested, but I had fun writing it. It is cobbled together from the waveshare demo, it needs refactoring and testing badly, please read the code before you put it into use. Put it in the Writing folder, and it'll watch it + subfolders for changes. Save or create a file, and one oled will tell you how close you are to 50k and 100k in the whole folder with the changed file, and the other will show the changed file's word count vs. a goal of 3001 (or you can set it manually at the top of the file with word-goal: 2000 or whatever). 3001 so you know it's the default. Buttons are (top to bottom) 15 minute timer, 25 minute timer, unassigned, and 5 minute break. The sprint timers use the last saved file so won't do anything if you haven't saved this session (you can save a file that's unchanged and it'll count).
 
 When run nohup the buttons are uninterruptible, I should probably figure out threading. 
+
+Note when you install python libraries, do it in the format "sudo apt install python3-numpy" or whatever, not "sudo python3 -m pip install numpy", if it yells at you. No idea the difference.
 
 ## todo
 
