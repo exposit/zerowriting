@@ -24,6 +24,18 @@ You need (just off the top of my head) snap if you want helix + marksman. Otherw
 
 Oh, and while you have raspi-config do set the timezone and keyboard to US. Otherwise you might be very confused later when "#" comes out as a literal pound sign.
 
+With keyboard in pairing mode:
+
+```
+bluetoothctl
+bluetooth scan on
+**wait for it to show up**
+pair [MAC ADDRESS]
+trust [MAC ADDRESS]
+```
+
+You can try "bluetooth off" to make it stop scrolling so you can write the number down if you need to. Possibly also need "connect", and I forget the exact order of trust, pair, connect. When the keyboard works, reboot, make sure it still works after a reboot.
+
 ## Setting up the tiny screen
 
 Bit of a pain in the ass, tbh. But so neat. I'm using the 2" lcd hat with dual oled screens (https://www.waveshare.com/oled-lcd-hat-a.htm). Wiki here: (https://www.waveshare.com/wiki/OLED/LCD_HAT_(A)). No reason, just thought the little screens would be fun to play with (and they are).
